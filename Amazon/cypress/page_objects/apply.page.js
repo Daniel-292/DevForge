@@ -18,7 +18,7 @@ class ApplyPage {
     get educationLevelMenu() {return cy.get('[class="select2 select2-container select2-container--bootstrap"]')};
     get listOfDegreOption() {return cy.get('[class="select2-dropdown select2-dropdown--below"]')};
     get schoolNameMenu() {return cy.get('[aria-label="School name"]')};
-    get firstSchoolNameIntup() {return cy.get('[class="select2-search select2-search--dropdown"]')};
+    get firstSchoolNameInput() {return cy.get('[class="select2-search select2-search--dropdown"]')};
     get otherOption() {return cy.get('[class="select2-results__option select2-results__option--highlighted"]')};
     get secondSchoolNameInput() {return cy.get('[id="HIGHEST_NAME_OF_INSTITUTION_OTHER"]')};
     get areaOfStudyInput() {return cy.get('[id="HIGHEST_AREA_OF_STUDY"]')};

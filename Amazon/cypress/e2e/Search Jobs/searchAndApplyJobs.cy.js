@@ -30,8 +30,8 @@ describe("Find and Apply Jobs", () => {
   dashboardPage.goToMyApplication.click();
     cy.visit(Cypress.env("userDetailsPage"));
     cy.visit(Cypress.env("homePage"));
-    amazonFindJobPage.shearchInput.type(user.job);
-    amazonFindJobPage.shearchButton.click();
+    amazonFindJobPage.searchInput.type(user.job);
+    amazonFindJobPage.searchButton.click();
     resultOfShearchPage.industryExperienceFilter.contains("1-3 years").click();
     resultOfShearchPage.fullTimeJobButton.click();
     resultOfShearchPage.jobCategoryQualityEngineeringButton.click();
@@ -59,7 +59,7 @@ describe("Find and Apply Jobs", () => {
     applyPage.educationLevelMenu.click();
     applyPage.listOfDegreOption.contains("Associate's").type('{enter}');
     applyPage.schoolNameMenu.click();
-    applyPage.firstSchoolNameIntup.type('QWE');
+    applyPage.firstSchoolNameInput.type('QWE');
     applyPage.otherOption.click();
     applyPage.secondSchoolNameInput.type(user.schoolName);
     applyPage.areaOfStudyInput.type(user.areaOfStudy);

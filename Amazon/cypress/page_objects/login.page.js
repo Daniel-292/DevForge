@@ -1,4 +1,4 @@
-class Login{
+class LoginPage{
     get emailInput() {return cy.get('[name="username"]')};
     get continueButtton() {return cy.get('[type="submit"]')};
     get passwordInput() {return cy.get('[name="password"]')};
@@ -8,4 +8,4 @@ class Login{
     get submitButton() {return cy.get('[class="btn btn-main btn btn-default btn-block"]')};
 }
 
-export default new Login();
+export default new LoginPage();
