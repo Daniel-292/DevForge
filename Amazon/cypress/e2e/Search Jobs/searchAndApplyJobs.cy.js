@@ -91,7 +91,7 @@ describe("Find and Apply Jobs", () => {
     applyPage.requireSponsorchipNoChechBox.click({ force: true });
     applyPage.backgroundLastSevenYearsYesCheckBox.click({ force: true });
     applyPage.backgroundCheckCountriesLabel.click().should('be.exist');
-    applyPage.backgroundCountriesList.contains(user.backgroundCountry).click();
+    applyPage.backgroundCountriesList.contains(user.backgroundCountry).trigger('mouseover').trigger('mousedown').trigger('mouseup');
     applyPage.governmentEmployeeNoCheckBox.click({ force: true });
     applyPage.deemedExportDoYouResideInNoCheckBox.click({ force: true });
     applyPage.yourCitizenshipLabel.click();
