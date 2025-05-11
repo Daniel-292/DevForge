@@ -1,51 +1,22 @@
 name: E2E on Chrome
-
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, reopened, edited, synchronize]
   workflow_dispatch:
     inputs:
       branch:
         description: 'Branch to test'
         required: false
-
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
 jobs:
-  cypress-run:
+  Cypress-Run:
     runs-on: ubuntu-latest
-    name: Run Cypress Tests
-
+    name: E2E on Chrome
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./Amazon
-
-      - name: Run Cypress tests on Chrome
-        uses: cypress-io/github-action@v6
+      - name: Cypress run
+        uses: cypress-io/github-action@v6.6.1
         with:
           browser: chrome
           working-directory: ./Amazon
-
-      - name: Upload screenshots on failure
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: cypress-screenshots
-          path: AMAZON/cypress/screenshots
-
-      - name: Upload videos
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: cypress-videos
-          path: Amazon/cypress/videos
