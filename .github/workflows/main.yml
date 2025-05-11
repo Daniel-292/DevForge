@@ -1,43 +1,42 @@
-name: E2E on Chrome
-
-permissions:
-  actions: write
-  contents: read
+name: Run Tests
 
 on:
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch to test'
-        required: false
+  push:
+    branches:
+      - main
   pull_request:
-    types: [opened, reopened, edited, synchronize]
+    branches:
+      - main
 
 jobs:
-  Cypress-Run:
+  test:
     runs-on: ubuntu-latest
-    name: E2E on Chrome
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.1
+      # Крок 1: Клонування репозиторію
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: List Amazon folder
-        run: ls -R Amazon
+      # Крок 2: Встановлення Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Ви можете змінити версію Node.js на потрібну
 
+      # Крок 3: Встановлення залежностей
       - name: Install dependencies
-        run: cd AMAZON && npm install
+        run: npm install
 
+      # Крок 4: Запуск тестів (наприклад, із Cypress)
       - name: Run Cypress tests
-        run: cd Amazon && npx cypress run --browser chrome
+        run: npm run cy:run # Припускаю, що у вас є скрипт "cy:run" для запуску тестів у package.json
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }} # Якщо ви використовуєте Cypress Dashboard
 
-      - name: Check for screenshots
-        if: failure()
-        run: ls -R Amazon/cypress/screenshots || echo "No screenshots found"
-
-      - name: Upload Cypress screenshots
-        if: failure()
-        uses: actions/upload-artifact@v4
+      # Крок 5 (опціонально): Збереження артефактів (наприклад, скріншоти з тестів)
+      - name: Upload test artifacts
+        if: failure() # Завантажуємо артефакти, якщо тести провалилися
+        uses: actions/upload-artifact@v3
         with:
           name: cypress-screenshots
-          path: Amazon/cypress/screenshots
+          path: cypress/screenshots
