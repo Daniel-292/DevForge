@@ -1,42 +1,51 @@
-name: Run Tests
+name: E2E on Chrome
 
 on:
   push:
     branches:
       - main
   pull_request:
-    branches:
-      - main
+    types: [opened, reopened, edited, synchronize]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to test'
+        required: false
 
 jobs:
-  test:
+  cypress-run:
     runs-on: ubuntu-latest
+    name: Run Cypress Tests
 
     steps:
-      # Крок 1: Клонування репозиторію
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # Крок 2: Встановлення Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16' # Ви можете змінити версію Node.js на потрібну
+          node-version: 18
 
-      # Крок 3: Встановлення залежностей
       - name: Install dependencies
         run: npm install
+        working-directory: ./Amazon
 
-      # Крок 4: Запуск тестів (наприклад, із Cypress)
-      - name: Run Cypress tests
-        run: npm run cy:run # Припускаю, що у вас є скрипт "cy:run" для запуску тестів у package.json
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }} # Якщо ви використовуєте Cypress Dashboard
+      - name: Run Cypress tests on Chrome
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          working-directory: ./Amazon
 
-      # Крок 5 (опціонально): Збереження артефактів (наприклад, скріншоти з тестів)
-      - name: Upload test artifacts
-        if: failure() # Завантажуємо артефакти, якщо тести провалилися
-        uses: actions/upload-artifact@v3
+      - name: Upload screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-screenshots
-          path: cypress/screenshots
+          path: AMAZON/cypress/screenshots
+
+      - name: Upload videos
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: Amazon/cypress/videos
