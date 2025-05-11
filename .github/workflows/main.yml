@@ -1,12 +1,15 @@
 name: E2E on Chrome
+permissions:
+  actions: write
+  contents: read
 on:
   workflow_dispatch:
     inputs:
       branch:
         description: 'Branch to test'
         required: false
-    pull_request:
-      types: [opened, reopened, edited, synchronize]
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
 jobs:
   Cypress-Run:
     runs-on: ubuntu-latest
@@ -19,9 +22,13 @@ jobs:
         with:
           browser: chrome
           working-directory: ./AMAZON
+          install: npm  # Додаємо менеджер пакетів
+      - name: Check for screenshots
+        if: failure()
+        run: ls -R AMAZON/cypress/screenshots
       - name: Upload Cypress screenshots
         if: failure()
-        uses: actions/upload-artifact@v4  # Оновлено до v4
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-screenshots
           path: AMAZON/cypress/screenshots
