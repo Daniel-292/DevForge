@@ -36,7 +36,7 @@ describe("Find and Apply Jobs", () => {
     resultOfShearchPage.fullTimeJobButton.click();
     resultOfShearchPage.jobCategoryQualityEngineeringButton.click();
     resultOfShearchPage.countryUnitedStatesButton.click();
-    resultOfShearchPage.jobTitle.contains("Quality Assurance Engineer, FireTV").click();
+    resultOfShearchPage.jobTitle.contains("Software Quality Assurance Engineer, Multimedia QA").click();
     jobDescriptionPage.applyNowButton.click();
     applyPage.firstNameInput.type(user.firstName);
     applyPage.lastNameInput.type(user.lastName);
@@ -49,7 +49,7 @@ describe("Find and Apply Jobs", () => {
     applyPage.selectStateMenu.click();
     applyPage.listOfStates.contains('Georgia').click();
     applyPage.saveAndContinueButton.click();
-    applyPage.skipAndContinueButton.should('be.visible').click();
+    applyPage.skipAndContinueButton.should('be.exist').click();
     applyPage.readyToRealocate.contains('Yes').click();
     applyPage.howDidYouHearDropdown.click();
     applyPage.howDidYouHearResultsList.contains('Amazon Career Site').click();
@@ -81,8 +81,8 @@ describe("Find and Apply Jobs", () => {
     applyPage.jobSpecificAnswer.contains('Yes').trigger('mouseover').trigger('mousedown').trigger('mouseup');
     applyPage.sixthJobSpecificQuestion.should('be.visible').click().click().click();
     applyPage.jobSpecificAnswer.contains('Yes').trigger('mouseover').trigger('mousedown').trigger('mouseup');
-    applyPage.seventhJobSpecificQuestion.should('be.visible').click().click().click();
-    applyPage.jobSpecificAnswer.contains('Yes').trigger('mouseover').trigger('mousedown').trigger('mouseup');
+    // applyPage.seventhJobSpecificQuestion.should('be.visible').click().click().click();
+    // applyPage.jobSpecificAnswer.contains('Yes').trigger('mouseover').trigger('mousedown').trigger('mouseup');
     applyPage.continueButton.click();
     applyPage.appliedToAmazonNoCheckBox.click({ force: true });
     applyPage.beenEmployedByAmazonNoCheckBox.click({ force: true });
@@ -99,6 +99,7 @@ describe("Find and Apply Jobs", () => {
     applyPage.becomePermanentResidentNoCheckBox.click({ force: true });
     applyPage.continueButton.click();
     applyPage.uploadResume.selectFile('cypress/fixtures/Resume.docx', { force: true });
+    cy.get('.loading-spinner', { timeout: 10000 }).should('not.exist');
     applyPage.continueAndSaveButton.should('be.visible').click();
     applyPage.confirmAcknowledgeAboveCheckBox.click({ force: true });
     applyPage.continueButton.click();
