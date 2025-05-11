@@ -20,8 +20,8 @@ jobs:
           browser: chrome
           working-directory: ./AMAZON
       - name: Upload Cypress screenshots
-        if: failure()  # Виконується, якщо попередній крок (Cypress run) провалився
-        uses: actions/upload-artifact@v3
+        if: failure()
+        uses: actions/upload-artifact@v4  # Оновлено до v4
         with:
-          name: cypress-screenshots  # Назва артефакту
-          path: AMAZON/cypress/screenshots  # Шлях до папки зі скріншотами
+          name: cypress-screenshots
+          path: AMAZON/cypress/screenshots
