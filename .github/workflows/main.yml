@@ -22,22 +22,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: List AMAZON folder
-        run: ls -R AMAZON
+      - name: List Amazon folder
+        run: ls -R Amazon
 
       - name: Install dependencies
         run: cd AMAZON && npm install
 
       - name: Run Cypress tests
-        run: cd AMAZON && npx cypress run --browser chrome
+        run: cd Amazon && npx cypress run --browser chrome
 
       - name: Check for screenshots
         if: failure()
-        run: ls -R AMAZON/cypress/screenshots || echo "No screenshots found"
+        run: ls -R Amazon/cypress/screenshots || echo "No screenshots found"
 
       - name: Upload Cypress screenshots
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: cypress-screenshots
-          path: AMAZON/cypress/screenshots
+          path: Amazon/cypress/screenshots
