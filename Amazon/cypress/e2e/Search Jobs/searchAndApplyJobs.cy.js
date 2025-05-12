@@ -24,7 +24,7 @@ describe("Find and Apply Jobs", () => {
       cy.getVerificationCode(mailjs ).then((code) => {
         cy.log(`Verification code: ${code}`)
         cy.get('[id="verificationFormCodeInputField"]').type(code);
-        cy.get('[class="btn btn-main btn btn-default btn-block"]').click();
+        cy.get('[class="btn btn-main btn btn-default btn-block"]').click({ timeout: 10000 });
       });
     });
   dashboardPage.goToMyApplication.click();
@@ -48,7 +48,7 @@ describe("Find and Apply Jobs", () => {
     applyPage.listOfCountries.contains(user.country).click();
     applyPage.selectStateMenu.click();
     applyPage.listOfStates.contains('Georgia').click();
-    applyPage.saveAndContinueButton.click();
+    applyPage.saveAndContinueButton.click({ timeout: 10000 });
     applyPage.skipAndContinueButton.should('be.exist').click();
     applyPage.readyToRealocate.contains('Yes').click();
     applyPage.howDidYouHearDropdown.click();
