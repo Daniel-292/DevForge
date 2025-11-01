@@ -49,7 +49,7 @@ class ApplyPage {
     get becomePermanentResidentNoCheckBox() {return cy.get('[data-testid="DEEMED_EXPORT_PERMANENT_RESIDENT_OTHER_COUNTRY_FIRST_V2-NO"]')};
     get uploadResume() {return cy.get('[type="file"]')};
     get continueAndSaveButton() {return cy.get('[class="btn btn-primary mt-5"]')};
-    get confirmAcknowledgeAboveCheckBox() {return cy.get('[class="custom-control-label"]')};
+    get confirmAcknowledgeAboveCheckBox() {return cy.get('[data-questionid="ACKNOWLEDGEMENT_V2"]')};
     get maleGenderCheckBox() {return cy.get('[data-testid="DIVERSITY_GENDER-MALE"]')};
     get whiteRaceCheckBox() {return cy.get('[data-testid="DIVERSITY_RACE_BACKGROUND-WHITE"]')};
     get disabilityNoCheckBox() {return cy.get('[data-testid="DISABILITY-NO"]')};

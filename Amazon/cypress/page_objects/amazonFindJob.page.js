@@ -1,5 +1,5 @@
 class AmazonFindJobPage{
-    get searchInput() {return cy.get('[data-react-class="SearchInput"]')};
+    get searchInput() {return cy.get('[id="search_typeahead-homepage"]')};
     get locationInput() {return cy.get('[class="undefined form-control tt-input"]')};
     get searchButton() {return cy.get('[id="search-button"]')};
     get dropdownMenuLink() {return cy.get('[id="dropdownMenuLink"]')};
