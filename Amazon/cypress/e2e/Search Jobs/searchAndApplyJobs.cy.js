@@ -27,8 +27,8 @@ describe("Find and Apply Jobs", () => {
         cy.get('[class="btn btn-main btn btn-default btn-block"]').click({ timeout: 10000 });
       });
     });
-  dashboardPage.goToMyApplication.click();
-    cy.visit(Cypress.env("userDetailsPage"));
+  //dashboardPage.goToMyApplication.click();
+    // cy.visit(Cypress.env("userDetailsPage"));
     cy.visit(Cypress.env("homePage"));
     amazonFindJobPage.searchInput.type(user.job);
     amazonFindJobPage.searchButton.click();
@@ -36,7 +36,7 @@ describe("Find and Apply Jobs", () => {
     resultOfShearchPage.fullTimeJobButton.click();
     resultOfShearchPage.jobCategoryQualityEngineeringButton.click();
     resultOfShearchPage.countryUnitedStatesButton.click();
-    resultOfShearchPage.jobTitle.contains("Software Quality Assurance Engineer, Multimedia QA").click();
+    resultOfShearchPage.jobTitle.contains("Embedded Firmware QA Engineer, eero").click();
     jobDescriptionPage.applyNowButton.click();
     applyPage.firstNameInput.type(user.firstName);
     applyPage.lastNameInput.type(user.lastName);
@@ -73,14 +73,14 @@ describe("Find and Apply Jobs", () => {
     applyPage.jobSpecificAnswer.contains('Yes').trigger('mouseover').trigger('mousedown').trigger('mouseup');
     applyPage.secondJobSpecificQuestion.should('be.visible').click().click();
     applyPage.jobSpecificAnswer.contains('No').trigger('mouseover').trigger('mousedown').trigger('mouseup');
-    applyPage.thirdJobSpecificQuestion.should('be.visible').click().click().click();
-    applyPage.jobSpecificAnswer.contains('Yes').trigger('mouseover').trigger('mousedown').trigger('mouseup');
-    applyPage.fourthJobSpecificQuestion.should('be.visible').click().click().click();
-    applyPage.jobSpecificAnswer.contains('Yes').trigger('mouseover').trigger('mousedown').trigger('mouseup');
-    applyPage.fifthJobSpecificQuestion.should('be.visible').click().click().click();
-    applyPage.jobSpecificAnswer.contains('Yes').trigger('mouseover').trigger('mousedown').trigger('mouseup');
-    applyPage.sixthJobSpecificQuestion.should('be.visible').click().click().click();
-    applyPage.jobSpecificAnswer.contains('Yes').trigger('mouseover').trigger('mousedown').trigger('mouseup');
+    //applyPage.thirdJobSpecificQuestion.should('be.visible').click().click().click();
+    //applyPage.jobSpecificAnswer.contains('Yes').trigger('mouseover').trigger('mousedown').trigger('mouseup');
+    // applyPage.fourthJobSpecificQuestion.should('be.visible').click().click().click();
+    // applyPage.jobSpecificAnswer.contains('Yes').trigger('mouseover').trigger('mousedown').trigger('mouseup');
+    // applyPage.fifthJobSpecificQuestion.should('be.visible').click().click().click();
+    // applyPage.jobSpecificAnswer.contains('Yes').trigger('mouseover').trigger('mousedown').trigger('mouseup');
+    // applyPage.sixthJobSpecificQuestion.should('be.visible').click().click().click();
+    // applyPage.jobSpecificAnswer.contains('Yes').trigger('mouseover').trigger('mousedown').trigger('mouseup');
     // applyPage.seventhJobSpecificQuestion.should('be.visible').click().click().click();
     // applyPage.jobSpecificAnswer.contains('Yes').trigger('mouseover').trigger('mousedown').trigger('mouseup');
     applyPage.continueButton.click();
@@ -101,7 +101,11 @@ describe("Find and Apply Jobs", () => {
     applyPage.uploadResume.selectFile('cypress/fixtures/Resume.docx', { force: true });
     cy.get('.loading-spinner', { timeout: 10000 }).should('not.exist');
     applyPage.continueAndSaveButton.should('be.visible').click();
-    applyPage.confirmAcknowledgeAboveCheckBox.click({ force: true });
+    applyPage.confirmAcknowledgeAboveCheckBox
+    .find('input[type="checkbox"].custom-control-input')
+    .should('exist')
+    .and('not.be.checked')
+    .click({ force: true });
     applyPage.continueButton.click();
     applyPage.maleGenderCheckBox.click({ force: true });
     applyPage.whiteRaceCheckBox.click({ force: true });
